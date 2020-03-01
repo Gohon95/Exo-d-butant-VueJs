@@ -376,3 +376,8 @@ html .clear-completed:active {
 }
 
 .Class1 { text-decoration: line-through; color: #000000; }
+
+.completed + label {
+    text-decoration: line-through;
+    color: lightgray;
+}

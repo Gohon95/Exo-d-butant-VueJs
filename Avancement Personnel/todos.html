@@ -13,16 +13,24 @@
         placeholder="Ajouter une tache" v-model="newTodo" @keyup.enter="addTodo">
       </header>
       <div class="main">
-        <input type="checkbox" id="toggle-all" class="toggle-all">
-        <label for="toggle-all">Mark all as complete</label>
+        <input type="checkbox" id="toggle-all" class="toggle-all" @click="allCompleted($event)">
+        <label for="toggle-all" @click="allCompleted">Mark all as complete</label>
         <ul class="todo-list">
-          <li class="todo" :class="(completed: todo.completed)">
+          <li class="todo" v-for="todo in todos">
+            <div class="view">
+              <input type="checkbox" v-model="todo.completed" :class="{completed: todo.completed}" class="toggle">
+              <label >{{ todo.name }}</label>
+              <button class="destroy" @click="supTodo(todo)"></button>
+            </div>
+            <input type="text" class="edit"> 
+          </li>
+         <!-- <li class="todo" v-for="todo in todos" :class="(completed: todo.completed)">
             <div class="view">
               <input type="checkbox" v-model="todo.completed" class="toggle">
               <label >Tâche 1</label>
               <button class="destroy"></button>
             </div>
-            <!-- <input type="text" class="edit"> -->
+            <input type="text" class="edit"> 
           </li>
           <li class="todo completed">
             <div class="view">
@@ -30,18 +38,19 @@
               <label >Tâche 2</label>
               <button class="destroy"></button>
             </div>
-            <!-- <input type="text" class="edit"> -->
-          </li>
+            <input type="text" class="edit">
+          </li>-->
         </ul>
       </div>
-      <footer class="footer">
-        <span class="todo-count"><strong>1</strong> tâches à faire</span>
+      <footer class="footer" v-if="todos.length">
+        <span class="todo-count">
+          <strong>{{ remaining }}</strong> tâches à faire</span>
         <ul class="filters">
           <li><a href="#" class="selected">Toutes</a></li>
-          <li><a href="#">À faire</a><strong>{{ remaining }}</strong></li>
+          <li><a href="#">À faire</a></li>
           <li><a href="#">Faites</a></li>
         </ul>
-        <button class="clear-completed">Clear accomplished</button>
+        <button class="clear-completed" @click="clearAccomplished" v-if="completed > 0">Clear accomplished</button>
       </footer>
     </section>
   </div>
