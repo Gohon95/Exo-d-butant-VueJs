@@ -12,6 +12,13 @@
         <input type="text" class="new-todo" 
         placeholder="Ajouter une tache" v-model="newTodo" @keyup.enter="addTodo">
       </header>
+      <!--
+        @vclick = donne une action au bouton
+        @v-on = sert à éxecuter le JavaScript lors que la directive est déclenché
+        v-for = affiche le rendu des éléments du tableau
+        :class = active l'élément du css indiqué
+        v-model = 
+      -->
       <div class="main">
         <input type="checkbox" id="toggle-all" class="toggle-all" @click="allCompleted($event)">
         <label for="toggle-all" @click="allCompleted">Mark all as complete</label>
